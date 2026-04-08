@@ -3,14 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Data
-data = {
-    "Student" : ["Altamash","Tayeeb","Huzeib","Abdullah","Noman"],
-    "Math" : [78, 85, 62, 90, 70],
-    "Science" : [88, 79, 74, 92, 68],
-    "English" : [80, 75, 70, 95, 72]
-}
-df = pd.DataFrame(data)
-
+df = pd.read_csv("student_data.csv")
 print("Raw Data: ")
 print(df)
 
