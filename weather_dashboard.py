@@ -37,12 +37,14 @@ def fetch_weather():
 
                 condition = hour["condition"]["text"]
 
-                icon_url = "http:" + hour["condition"]["icon"]
-                icon_response = requests.get(icon_url)
-                icon_img = Image.open(io.BytesIO(icon_response.content))
-                icon_img = icon_img.resize((30,30))
-
-                icon_photo = ImageTk.PhotoImage(icon_img)
+                try:
+                    icon_url = "http:" + hour["condition"]["icon"]
+                    icon_response = requests.get(icon_url, timeout=5)  # timeout added
+                    icon_img = Image.open(io.BytesIO(icon_response.content))
+                    icon_img = icon_img.resize((30,30))
+                    icon_photo = ImageTk.PhotoImage(icon_img)
+                except Exception:
+                    icon_photo = None  # fallback if icon fails
 
                 label = tk.Label(scrollable_frame,
                                  text=f"{time.strftime('%d %b %H:%M')} → {temp} °C, {condition}",
